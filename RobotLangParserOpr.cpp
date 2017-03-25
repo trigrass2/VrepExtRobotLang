@@ -1,5 +1,9 @@
 #include "RobotLangParserOpr.h"
+#ifndef WIN_VREP
+#include <boost/lexical_cast.hpp>
+#else
 #include <boost\lexical_cast.hpp>
+#endif
 #include <string>
 #include <utility>
 #include <cctype>
@@ -340,7 +344,14 @@ void CRobotLangParserAndOperator::GetListofLabels(char variables[])
     {
         eachVariable = eachVariable + (std::string) _labels[i];
         eachVariable += "(";
-        itoa(_labelLocations[i], strLineNo, 10);
+
+
+        #ifndef WIN_VREP
+           sprintf(strLineNo,"%d",_labelLocations[i]);
+        #else
+          itoa(_labelLocations[i], strLineNo, 10);
+        #endif
+
         eachVariable += strLineNo;
         eachVariable += ")";
         eachVariable += " ";
@@ -1658,7 +1669,14 @@ int CRobotLangParserAndOperator::DoLogicalOperation(std::string &strStatement, i
 
 
             char strResult[5];
-            sprintf_s(strResult, "%d", iResult);
+
+#ifndef WIN_VREP
+ sprintf(strResult, "%d", iResult);
+#else
+ sprintf_s(strResult, "%d", iResult);
+#endif
+
+
 
             int szStart = strStatement.find(condWords.c_str());
             strStatement.replace(szStart, condWords.size(), strResult);

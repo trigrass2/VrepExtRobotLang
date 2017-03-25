@@ -1087,11 +1087,19 @@ int CKss1500MotionPlannar::RunProgram(float deltaTime)
             std::string codeWord;
             int iGetValue;
             char chIOs[12];
-
+           #ifndef WIN_VREP
+            sprintf(chIOs, "IN%d", (int)_compiledRobotLanguageProgram[_currentProgramLine]._floatParameter[0]);
+           #else
             sprintf_s(chIOs, "IN%d", (int)_compiledRobotLanguageProgram[_currentProgramLine]._floatParameter[0]);
+           #endif
             std::string strInputIO(chIOs);
 
-            sprintf_s(chIOs, "OUT%d", (int)_compiledRobotLanguageProgram[_currentProgramLine]._floatParameter[2]);
+#ifndef WIN_VREP
+ sprintf(chIOs, "IN%d", (int)_compiledRobotLanguageProgram[_currentProgramLine]._floatParameter[0]);
+#else
+ sprintf_s(chIOs, "OUT%d", (int)_compiledRobotLanguageProgram[_currentProgramLine]._floatParameter[2]);
+#endif
+
             std::string strOutputIO(chIOs);
 
             int iInputData = (int)_compiledRobotLanguageProgram[_currentProgramLine]._floatParameter[1];

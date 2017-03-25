@@ -1,7 +1,7 @@
 #pragma once
 
 #include "VrepExtExport.h"
-#include "commonH.h"
+#include "CommonH.h"
 
 //	Check move range with Kinematics
 class VREP_ROBOTLANG_API CKss1500MoveRange

@@ -13,6 +13,7 @@ CONFIG += c++14
 CONFIG += stl
 CONFIG += staticlib
 DEFINES += QT_COMPIL
+QMAKE_CXXFLAGS += -std=c++14
 
 win32 {
     DEFINES += WIN_VREP
